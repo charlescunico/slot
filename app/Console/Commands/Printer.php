@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Payout;
 use Illuminate\Console\Command;
 use App\Models\Board;
 
@@ -28,11 +29,15 @@ class Printer extends Command
      */
     public function handle()
     {
+        $board = Board::getRandom();
+        $paylines = Payout::getPaylines($board);
+        $totalWin = Payout::getTotalWin($paylines);
+
         $output = json_encode([
-            'board' => Board::getRandom(),
-            'paylines' => [],
+            'board' => $board,
+            'paylines' => $paylines,
             'bet_amount' => 100,
-            'total_win' => 0
+            'total_win' => $totalWin
         ]);
         $this->line($output);
         return $output;

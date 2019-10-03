@@ -6,7 +6,7 @@ class Board
 {
     const SIZE = 15;
 
-    public static function getRandom()
+    public static function getRandom(): array
     {
         $max = Symbol::getLastKey();
         $board = [];
