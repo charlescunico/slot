@@ -20,9 +20,14 @@ class Payout
 
     const BET_VALUE = 100;
 
+    /**
+     * Returns array with the matched payline and number of matched symbol
+     * @param array $board
+     * @return array
+     */
     public static function getPaylines(array $board): array
     {
-        $board = self::getAllocatedBoard($board);
+        $board = Board::getAllocated($board);
         $resultingPaylines = [];
         foreach (self::PAYLINES as $payline) {
             $validSequence = self::getValidSequence($payline, $board);
@@ -34,6 +39,11 @@ class Payout
         return $resultingPaylines;
     }
 
+    /**
+     * Returns the amount won
+     * @param array $resultingPaylines
+     * @return int
+     */
     public static function getTotalWin(array $resultingPaylines): int
     {
         $totalWin = 0;
@@ -46,18 +56,12 @@ class Payout
         return $totalWin;
     }
 
-    private static function getAllocatedBoard(array $board): array
-    {
-        $allocatedBoard = [];
-        for ($column=0; $column<Board::COLUMNS; $column++) {
-            for ($row=0; $row<Board::ROWS; $row++) {
-                $allocatedBoard[] = $board[$row * Board::COLUMNS + $column];
-            }
-        }
-
-        return $allocatedBoard;
-    }
-
+    /**
+     * Returns de number of valid sequence
+     * @param array $payline
+     * @param array $board
+     * @return int
+     */
     private static function getValidSequence(array $payline, array $board): int
     {
         $currentSymbol = '';

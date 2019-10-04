@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Laravel\Lumen\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\Printer;
+use App\Console\Commands\Play;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Printer::class
+        Play::class
     ];
 
     /**

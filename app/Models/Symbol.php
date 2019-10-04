@@ -17,6 +17,10 @@ class Symbol
         'bird'
     ];
 
+    /**
+     * Return the key of the last Symbol
+     * @return int
+     */
     public static function getLastKey(): int
     {
         return array_key_last(self::SYMBOLS);

@@ -6,38 +6,38 @@ use App\Models\Payout;
 use Illuminate\Console\Command;
 use App\Models\Board;
 
-class Printer extends Command
+class Play extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:printer';
+    protected $signature = 'command:play';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Print the results of the game';
+    protected $description = 'Play the game and print the results';
 
     /**
      * Execute the console command.
      *
      * @return mixed
+     * @throws \Exception
      */
     public function handle()
     {
         $board = Board::getRandom();
         $paylines = Payout::getPaylines($board);
-        $totalWin = Payout::getTotalWin($paylines);
 
         $output = json_encode([
-            'board' => $board,
+            'board' => Board::getSymbols($board),
             'paylines' => $paylines,
             'bet_amount' => Payout::BET_VALUE,
-            'total_win' => $totalWin
+            'total_win' => Payout::getTotalWin($paylines)
         ]);
         $this->line($output);
         return $output;
