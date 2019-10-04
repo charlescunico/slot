@@ -36,7 +36,7 @@ class Printer extends Command
         $output = json_encode([
             'board' => $board,
             'paylines' => $paylines,
-            'bet_amount' => 100,
+            'bet_amount' => Payout::BET_VALUE,
             'total_win' => $totalWin
         ]);
         $this->line($output);

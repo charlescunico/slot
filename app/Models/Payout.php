@@ -18,21 +18,63 @@ class Payout
         5 => 10
     ];
 
-    const MATRIX = [
-        0, 5, 10,
-        1, 6, 11,
-        2, 7, 12,
-        3, 8, 13,
-        4, 9, 14
-    ];
+    const BET_VALUE = 100;
 
     public static function getPaylines(array $board): array
     {
-        $allocatedBoard = [];
-        foreach (self::MATRIX as $item) {
-            $allocatedBoard[] = $board[$item];
+        $board = self::getAllocatedBoard($board);
+        $resultingPaylines = [];
+        foreach (self::PAYLINES as $payline) {
+            $validSequence = self::getValidSequence($payline, $board);
+            if (array_key_exists($validSequence, self::BET_PERCENTAGE)) {
+                $resultingPaylines[] = [implode(' ', $payline) => $validSequence];
+            }
         }
 
-        return [];
+        return $resultingPaylines;
+    }
+
+    public static function getTotalWin(array $resultingPaylines): int
+    {
+        $totalWin = 0;
+        foreach ($resultingPaylines as $payline) {
+            foreach ($payline as $key) {
+                $totalWin += self::BET_VALUE * self::BET_PERCENTAGE[$key];
+            }
+        }
+
+        return $totalWin;
+    }
+
+    private static function getAllocatedBoard(array $board): array
+    {
+        $allocatedBoard = [];
+        for ($column=0; $column<Board::COLUMNS; $column++) {
+            for ($row=0; $row<Board::ROWS; $row++) {
+                $allocatedBoard[] = $board[$row * Board::COLUMNS + $column];
+            }
+        }
+
+        return $allocatedBoard;
+    }
+
+    private static function getValidSequence(array $payline, array $board): int
+    {
+        $currentSymbol = '';
+        $validSequence = 0;
+        foreach ($payline as $position) {
+            if (!$currentSymbol) {
+                $currentSymbol = $board[$position];
+                $validSequence++;
+                continue;
+            }
+            if ($currentSymbol == $board[$position]) {
+                $validSequence++;
+                continue;
+            }
+            break;
+        }
+
+        return $validSequence;
     }
 }
