@@ -38,7 +38,7 @@ class Play extends Command
             'paylines' => $paylines,
             'bet_amount' => Payout::BET_VALUE,
             'total_win' => Payout::getTotalWin($paylines)
-        ]);
+        ], JSON_PRETTY_PRINT);
         $this->line($output);
         return $output;
     }
