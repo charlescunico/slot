@@ -42,9 +42,9 @@ class Payout
     /**
      * Returns the amount won
      * @param array $resultingPaylines
-     * @return int
+     * @return float|int
      */
-    public static function getTotalWin(array $resultingPaylines): int
+    public static function getTotalWin(array $resultingPaylines)
     {
         $totalWin = 0;
         foreach ($resultingPaylines as $payline) {
