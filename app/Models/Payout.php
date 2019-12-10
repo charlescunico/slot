@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Models;
 
@@ -42,9 +42,9 @@ class Payout
     /**
      * Returns the amount won
      * @param array $resultingPaylines
-     * @return float|int
+     * @return float
      */
-    public static function getTotalWin(array $resultingPaylines)
+    public static function getTotalWin(array $resultingPaylines): float
     {
         $totalWin = 0;
         foreach ($resultingPaylines as $payline) {
