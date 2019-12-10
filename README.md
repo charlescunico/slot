@@ -67,6 +67,9 @@ Clone or download this repository and execute `composer install`
 ## Test
 Execute unit tests with `php vendor/bin/phpunit`
 
+## Analyse
+Execute static analyse with `php vendor/bin/phpstan analyse app -l 7`
+
 ## Run
 Execute `php artisan command:play`
 
