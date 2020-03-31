@@ -10,12 +10,18 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v2
-    - name: Install Dependencies
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies
       run: composer install -q --no-ansi --no-interaction --no-suggest --no-progress --prefer-dist
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
+
     - name: Execute static analyse via PHPStan
       run: vendor/bin/phpstan analyse app -l 7
