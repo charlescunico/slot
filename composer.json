@@ -1,7 +1,6 @@
 {
-    "name": "laravel/lumen",
-    "description": "The Laravel Lumen Framework.",
-    "keywords": ["framework", "laravel", "lumen"],
+    "name": "tcharlye/slot",
+    "description": "Simulated Slot Machine",
     "license": "MIT",
     "type": "project",
     "require": {
