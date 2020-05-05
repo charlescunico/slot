@@ -1,5 +1,8 @@
 # Simulated Slot Machine
 
+[![Build Status](https://github.com/tcharlye/slot/workflows/CI/badge.svg)](https://github.com/tcharlye/slot/actions)
+
+
 ## About
 Consists of a console command created inside a project using [Lumen].
 
